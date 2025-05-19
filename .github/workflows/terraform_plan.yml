@@ -16,7 +16,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
 
-      - run: terraform init
+      - name: init
+        run: |
+          cd terraform
+          terraform init
 
       - id: plan
-        run: terraform plan
+        run: |
+          cd terraform
+          terraform plan
