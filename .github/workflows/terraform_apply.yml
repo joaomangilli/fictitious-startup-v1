@@ -3,11 +3,13 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
-  plan:
+  apply:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
     steps:
       - uses: aws-actions/configure-aws-credentials@v4.1.0
         with:
@@ -16,7 +18,12 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
 
-      - run: terraform init
+      - name: init
+        run: |
+          cd terraform
+          terraform init
 
       - id: apply
-        run: terraform apply
+        run: |
+          cd terraform
+          terraform apply
