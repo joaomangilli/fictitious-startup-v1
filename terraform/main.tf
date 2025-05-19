@@ -9,6 +9,7 @@ terraform {
   backend "s3" {
     bucket = "artifactsjoao.mangilli"
     region = "us-east-2"
+    key = "terraform"
   }
 
   required_version = ">= 1.2.0"
