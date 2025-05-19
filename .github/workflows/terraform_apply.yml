@@ -26,4 +26,4 @@ jobs:
       - id: apply
         run: |
           cd terraform
-          terraform apply
+          terraform apply -auto-approve
