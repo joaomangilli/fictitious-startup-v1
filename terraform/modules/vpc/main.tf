@@ -23,7 +23,7 @@ resource "aws_route_table" "this" {
     for_each = each.value.routes
     content {
       cidr_block = route.value.cidr_block
-      gateway_id = aws_internet_gateway.this[each.value.gateway_name].id
+      gateway_id = aws_internet_gateway.this[route.value.gateway_name].id
     }
   }
 }
