@@ -53,7 +53,7 @@ module "vpc" {
       routes = [
         {
           cidr_block = "0.0.0.0/0"
-          gateway_id = "main"
+          gateway_name = "main"
         }
       ]
     }
@@ -63,7 +63,7 @@ module "vpc" {
       routes = [
         {
           cidr_block = "0.0.0.0/0"
-          gateway_id = "main"
+          gateway_name = "main"
         }
       ]
     }

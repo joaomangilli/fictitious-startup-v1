@@ -30,7 +30,7 @@ variable "route_table_parameters" {
     vpc_name = string
     routes = optional(list(object({
       cidr_block = string
-      gateway_id = string
+      gateway_name = string
     })), [])
   }))
   default = {}
