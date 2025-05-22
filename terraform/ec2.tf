@@ -65,7 +65,6 @@ resource "aws_instance" "web" {
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.web.id]
   iam_instance_profile        = aws_iam_instance_profile.web.name
-  associate_public_ip_address = true
 
   network_interface {
     network_interface_id = aws_network_interface.public_a.id
