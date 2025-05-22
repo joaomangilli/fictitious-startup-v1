@@ -21,7 +21,7 @@ jobs:
           cd terraform
           terraform init
 
-      - id: plan
+      - name: plan
         run: |
           cd terraform
           terraform plan
