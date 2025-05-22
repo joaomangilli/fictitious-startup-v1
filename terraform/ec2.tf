@@ -14,11 +14,6 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"]
 }
 
-resource "aws_network_interface" "public_a" {
-  subnet_id   = module.vpc.subnets.public_a.id
-  private_ips = ["172.32.64.100"]
-}
-
 resource "aws_security_group" "web" {
   vpc_id = module.vpc.vpcs.main.id
 
@@ -65,9 +60,6 @@ resource "aws_instance" "web" {
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.web.id]
   iam_instance_profile        = aws_iam_instance_profile.web.name
-
-  network_interface {
-    network_interface_id = aws_network_interface.public_a.id
-    device_index         = 0
-  }
+  associate_public_ip_address = true
+  subnet_id                   = module.vpc.subnets.public_a.id
 }
