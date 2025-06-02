@@ -26,4 +26,5 @@ jobs:
       - name: apply
         run: |
           cd terraform
+          export TF_VAR_db_username=${{ secrets.DB_USER }} TF_VAR_db_password=${{ secrets.DB_PASSWORD }}
           terraform apply -auto-approve
