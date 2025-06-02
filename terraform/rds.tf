@@ -23,6 +23,7 @@ resource "aws_security_group" "postgres" {
 }
 
 resource "aws_db_subnet_group" "postgres" {
+  name       = "mvp-postgres-subnet-group"
   subnet_ids = [module.vpc.subnets.private_a.id]
 }
 
