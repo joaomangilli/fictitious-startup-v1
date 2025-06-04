@@ -40,4 +40,5 @@ resource "aws_db_instance" "postgres" {
   vpc_security_group_ids = [aws_security_group.postgres.id]
   parameter_group_name   = aws_db_parameter_group.postgres.name
   allocated_storage      = 10
+  skip_final_snapshot    = true
 }
