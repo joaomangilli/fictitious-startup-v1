@@ -1,5 +1,6 @@
 data "aws_rds_engine_version" "postgres" {
-  engine = "postgres"
+  engine  = "postgres"
+  version = "16.3"
 }
 
 resource "aws_db_parameter_group" "postgres" {
