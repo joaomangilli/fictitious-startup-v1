@@ -2,7 +2,9 @@ resource "aws_security_group" "ec2_postgres" {
   vpc_id = module.vpc.vpcs.main.id
 }
 
-resource "aws_db_subnet_group" "ec2_postgres" {
+resource "aws_dms_replication_subnet_group" "ec2_postgres" {
+  replication_subnet_group_id = "ec2-postgres-dms-replication-subnet-group"
+  replication_subnet_group_description = "DMS replication subnet group for EC2-Postgres"
   subnet_ids = [module.vpc.subnets.private_a.id, module.vpc.subnets.private_b.id]
 }
 
@@ -10,7 +12,7 @@ resource "aws_dms_replication_instance" "ec2_postgres" {
   multi_az                    = false
   replication_instance_class  = "dms.t3.micro"
   replication_instance_id     = "ec2-postgres-dms-replication-instance"
-  replication_subnet_group_id = aws_db_subnet_group.ec2_postgres.id
+  replication_subnet_group_id = aws_dms_replication_subnet_group.ec2_postgres.id
   vpc_security_group_ids      = [aws_security_group.ec2_postgres.id]
 }
 
