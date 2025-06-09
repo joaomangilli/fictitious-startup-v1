@@ -1,5 +1,12 @@
 resource "aws_security_group" "ec2_postgres" {
   vpc_id = module.vpc.vpcs.main.id
+
+  egress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_dms_replication_subnet_group" "ec2_postgres" {
