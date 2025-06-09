@@ -57,6 +57,11 @@ resource "aws_iam_role_policy_attachment" "web" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+resource "aws_iam_role_policy_attachment" "s3" {
+  role       = aws_iam_role.web.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
+
 resource "aws_iam_instance_profile" "web" {
   name = "instance_profile"
   role = aws_iam_role.web.name
