@@ -29,7 +29,7 @@ resource "aws_dms_endpoint" "ec2_postgres_source" {
   database_name = aws_db_instance.postgres.db_name
   engine_name   = aws_db_instance.postgres.engine
   port          = aws_db_instance.postgres.port
-  server_name   = "172.32.67.253"
+  server_name   = aws_instance.web.private_ip
   password      = var.db_password
   username      = var.db_username
 }
