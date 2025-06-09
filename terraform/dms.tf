@@ -53,4 +53,8 @@ resource "aws_dms_replication_task" "ec2_postgres" {
   source_endpoint_arn      = aws_dms_endpoint.ec2_postgres_source.endpoint_arn
   target_endpoint_arn      = aws_dms_endpoint.ec2_postgres_target.endpoint_arn
   table_mappings           = "{\"rules\":[{\"rule-type\": \"selection\",\"rule-id\": \"229654541\",\"rule-name\":\"229654541\",\"object-locator\": {\"schema-name\": \"%\",\"table-name\": \"%\"},\"rule-action\": \"include\",\"filters\": []}]}"
+
+  lifecycle {
+    ignore_changes = ["replication_task_settings"]
+  }
 }
