@@ -1,6 +1,6 @@
 data "aws_rds_engine_version" "postgres" {
   engine  = "postgres"
-  version = "16.3"
+  version = "16.8"
 }
 
 resource "aws_db_parameter_group" "postgres" {
@@ -31,7 +31,7 @@ resource "aws_db_subnet_group" "postgres" {
 resource "aws_db_instance" "postgres" {
   db_name                = "mvp"
   engine                 = "postgres"
-  engine_version         = "16.3"
+  engine_version         = "16.8"
   instance_class         = "db.t3.micro"
   username               = data.aws_ssm_parameter.db_user.value
   password               = data.aws_ssm_parameter.db_password.value
