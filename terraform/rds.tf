@@ -33,8 +33,8 @@ resource "aws_db_instance" "postgres" {
   engine                 = "postgres"
   engine_version         = "16.3"
   instance_class         = "db.t3.micro"
-  username               = var.db_username
-  password               = var.db_password
+  username               = data.aws_ssm_parameter.db_user.value
+  password               = data.aws_ssm_parameter.db_password.value
   multi_az               = false
   db_subnet_group_name   = aws_db_subnet_group.postgres.name
   vpc_security_group_ids = [aws_security_group.postgres.id]

@@ -30,8 +30,8 @@ resource "aws_dms_endpoint" "ec2_postgres_source" {
   engine_name   = aws_db_instance.postgres.engine
   port          = aws_db_instance.postgres.port
   server_name   = aws_instance.web.private_ip
-  password      = var.db_password
-  username      = var.db_username
+  password      = data.aws_ssm_parameter.db_password.value
+  username      = data.aws_ssm_parameter.db_user.value
 }
 
 resource "aws_dms_endpoint" "ec2_postgres_target" {
@@ -41,8 +41,8 @@ resource "aws_dms_endpoint" "ec2_postgres_target" {
   engine_name   = aws_db_instance.postgres.engine
   port          = aws_db_instance.postgres.port
   server_name   = aws_db_instance.postgres.address
-  password      = var.db_password
-  username      = var.db_username
+  password      = data.aws_ssm_parameter.db_password.value
+  username      = data.aws_ssm_parameter.db_user.value
 }
 
 resource "aws_dms_replication_task" "ec2_postgres" {

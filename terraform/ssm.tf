@@ -8,6 +8,10 @@ resource "aws_ssm_parameter" "secret_key" {
   }
 }
 
+data "aws_ssm_parameter" "secret_key" {
+  name = aws_ssm_parameter.secret_key.name
+}
+
 resource "aws_ssm_parameter" "db_user" {
   name  = "/cloudtalents/startup/db_user"
   type  = "SecureString"
@@ -18,6 +22,10 @@ resource "aws_ssm_parameter" "db_user" {
   }
 }
 
+data "aws_ssm_parameter" "db_user" {
+  name = aws_ssm_parameter.db_user.name
+}
+
 resource "aws_ssm_parameter" "db_password" {
   name  = "/cloudtalents/startup/db_password"
   type  = "SecureString"
@@ -26,6 +34,10 @@ resource "aws_ssm_parameter" "db_password" {
   lifecycle {
     ignore_changes = ["value"]
   }
+}
+
+data "aws_ssm_parameter" "db_password" {
+  name = aws_ssm_parameter.db_password.name
 }
 
 resource "aws_ssm_parameter" "database_endpoint" {
