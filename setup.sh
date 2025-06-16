@@ -1,7 +1,7 @@
 #!/bin/bash
 
 APP_DIR="/opt/app"
-USER="ssm-user"
+USER="ubuntu"
 
 sudo chown -R $USER:$USER $APP_DIR
 
