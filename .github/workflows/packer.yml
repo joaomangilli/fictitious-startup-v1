@@ -21,7 +21,7 @@ jobs:
         run: packer init ./image.pkr.hcl
 
       - name: validate
-        run: packer validate ./image.pkr.hcl
+        run: packer validate -var "version=${{ github.event.release.tag_name }}" ./image.pkr.hcl
 
       - name: build
         run: packer build -var "version=${{ github.event.release.tag_name }}" -color=false -on-error=abort ./image.pkr.hcl
