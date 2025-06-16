@@ -6,7 +6,7 @@ USER="ubuntu"
 sudo chown -R $USER:$USER $APP_DIR
 
 sudo apt-get update
-sudo apt-get install -y python3-pip python3-venv nginx
+sudo apt-get install -y python3-pip python3.10-venv nginx
 
 python3 -m venv venv
 source venv/bin/activate
