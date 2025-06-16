@@ -1,0 +1,23 @@
+on:
+  release:
+    types: [published]
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4.1.0
+        with:
+          aws-region: us-east-2
+          role-to-assume: ${{ secrets.ARN_IAM_ROLE }}
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-packer@main
+
+      - name: init
+        run: packer init ./image.pkr.hcl
+
+      - name: validate
+        run: packer validate ./image.pkr.hcl
+
+      - name: build
+        run: packer build -var "version=${{ github.event.release.tag_name }}" -color=false -on-error=abort ./image.pkr.hcl
