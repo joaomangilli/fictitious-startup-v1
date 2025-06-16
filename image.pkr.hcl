@@ -20,7 +20,7 @@ source "amazon-ebs" "amazon-linux" {
   ami_name                    = "fictitious-startup-${var.version}"
   instance_type               = "t2.micro"
   region                      = "us-east-2"
-  ssh_username                = "ec2-user"
+  ssh_username                = "ubuntu"
   vpc_id                      = "vpc-030768e9484d41a45"
   subnet_id                   = "subnet-0e86a7685879c89d3"
   associate_public_ip_address = true
