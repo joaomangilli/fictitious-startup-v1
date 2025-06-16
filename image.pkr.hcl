@@ -47,12 +47,12 @@ build {
 
   provisioner "file" {
     source = "./"
-    destination = "/tmp/app"
+    destination = "/tmp"
   }
 
   provisioner "shell" {
     inline = [
-      "cp -r /tmp/app /opt/app",
+      "cp -r /tmp /opt/app",
     ]
   }
 
