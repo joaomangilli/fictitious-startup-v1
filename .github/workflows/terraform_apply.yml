@@ -1,7 +1,10 @@
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      custom_ami_version:
+        type: string
+        description: "AMI version"
+        required: true
 
 permissions:
   id-token: write
@@ -24,6 +27,8 @@ jobs:
           terraform init
 
       - name: apply
+        env:
+          TF_VAR_custom_ami_version: ${{ inputs.custom_ami_version }}
         run: |
           cd terraform
           terraform apply -auto-approve
