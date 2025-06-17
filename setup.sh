@@ -11,6 +11,7 @@ sudo apt-get install -y python3-pip python3.10-venv nginx
 python3 -m venv venv
 source venv/bin/activate
 
+ls /tmp
 ls $APP_DIR
 
 pip install --upgrade pip
