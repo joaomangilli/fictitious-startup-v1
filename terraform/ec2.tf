@@ -1,19 +1,3 @@
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/*ubuntu-jammy-22.04-amd64-server*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"]
-}
-
 resource "aws_security_group" "web" {
   vpc_id = module.vpc.vpcs.main.id
 
@@ -73,7 +57,7 @@ resource "aws_iam_instance_profile" "web" {
 }
 
 resource "aws_instance" "web" {
-  ami                         = data.aws_ami.ubuntu.id
+  ami                         = var.custom_ami_version
   instance_type               = "t2.micro"
   vpc_security_group_ids      = [aws_security_group.web.id]
   iam_instance_profile        = aws_iam_instance_profile.web.name
