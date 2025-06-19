@@ -64,3 +64,44 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
   subnet_id                   = module.vpc.subnets.public_a.id
 }
+
+resource "aws_launch_template" "web" {
+  image_id               = var.custom_ami_version
+  instance_type          = "t2.micro"
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.web.name
+  }
+
+  network_interfaces {
+    associate_public_ip_address = true
+    security_groups             = [aws_security_group.web.id]
+    subnet_id                   = module.vpc.subnets.public_a.id
+  }
+}
+
+resource "aws_autoscaling_group" "web" {
+  desired_capacity   = 1
+  max_size           = 5
+  min_size           = 1
+
+  launch_template {
+    id      = aws_launch_template.web.id
+    version = "$Latest"
+  }
+}
+
+resource "aws_autoscaling_policy" "web" {
+  name                      = "web"
+  autoscaling_group_name    = aws_autoscaling_group.web.name
+  estimated_instance_warmup = 60
+  policy_type               = "TargetTrackingScaling"
+
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 60.0
+  }
+}
