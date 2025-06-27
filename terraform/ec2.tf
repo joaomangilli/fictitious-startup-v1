@@ -63,6 +63,7 @@ resource "aws_instance" "web" {
   iam_instance_profile        = aws_iam_instance_profile.web.name
   associate_public_ip_address = true
   subnet_id                   = module.vpc.subnets.public_a.id
+  instance_initiated_shutdown_behavior = "stop"
 }
 
 resource "aws_launch_template" "web" {
@@ -81,9 +82,9 @@ resource "aws_launch_template" "web" {
 }
 
 resource "aws_autoscaling_group" "web" {
-  desired_capacity   = 1
+  desired_capacity   = 0
   max_size           = 5
-  min_size           = 1
+  min_size           = 0
 
   launch_template {
     id      = aws_launch_template.web.id
